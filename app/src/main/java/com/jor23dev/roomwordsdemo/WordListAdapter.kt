@@ -23,7 +23,9 @@ class WordListAdapter internal constructor(
         return WordViewHolder(itemView)
     }
 
-    override fun getItemCount() = words.size
+    override fun getItemCount(): Int {
+        return words.size
+    }
 
     override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
         val current = words[position]

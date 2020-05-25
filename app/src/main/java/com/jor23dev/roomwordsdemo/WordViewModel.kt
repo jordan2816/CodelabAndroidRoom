@@ -1,6 +1,7 @@
 package com.jor23dev.roomwordsdemo
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
@@ -16,6 +17,10 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
         val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
         repository = WordRepository(wordsDao)
         allWords = repository.allWords
+        viewModelScope.launch(Dispatchers.IO) {
+            var allWords2 = repository.getAll()
+            Log.d("HI", allWords2.toString())
+        }
     }
 
     fun insert(word: Word) = viewModelScope.launch(Dispatchers.IO) {
